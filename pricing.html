@@ -1,1 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing — Jira Chatbot</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>Jira Chatbot</div>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="connect.html">Connect</a>
+      </div>
+    </div>
 
+    <div class="card">
+      <div class="badge">Pricing</div>
+      <h1 class="h1" style="font-size:34px">Choose a plan</h1>
+      <p class="p">Pay and then connect your tools. You’ll be redirected back after purchase.</p>
+
+      <div class="hr"></div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="badge">Starter</div>
+          <h2 style="margin:10px 0 0">For small teams</h2>
+          <p class="p">1 workspace · basic Jira actions</p>
+          <div class="hr"></div>
+          <button class="btn ok" data-plan="starter">Buy Starter</button>
+        </div>
+
+        <div class="card">
+          <div class="badge">Pro</div>
+          <h2 style="margin:10px 0 0">Most popular</h2>
+          <p class="p">More usage · faster responses</p>
+          <div class="hr"></div>
+          <button class="btn ok" data-plan="pro">Buy Pro</button>
+        </div>
+
+        <div class="card">
+          <div class="badge">Business</div>
+          <h2 style="margin:10px 0 0">For orgs</h2>
+          <p class="p">Multiple teams · priority support</p>
+          <div class="hr"></div>
+          <button class="btn ok" data-plan="business">Buy Business</button>
+        </div>
+      </div>
+
+      <div id="toast" class="toast" style="display:none"></div>
+
+      <div class="hr"></div>
+      <div class="small">
+        If you use Stripe Payment Links, set them in <b>assets/config.js</b>.  
+        If you use Autom Mate to create checkout sessions, implement <b>CHECKOUT_ENDPOINT</b>.
+      </div>
+    </div>
+
+    <footer>
+      <div class="footerlinks">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/pricing.js"></script>
+</body>
+</html>
