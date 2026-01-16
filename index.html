@@ -1,1 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jira Chatbot — Jira in WhatsApp, Teams, Slack</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div id="brandName">Jira Chatbot</div>
+      </div>
+      <div class="navlinks">
+        <a href="connect.html">Connect</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
 
+    <div class="hero">
+      <div class="card">
+        <div class="badge">Chat-first Jira</div>
+        <h1 class="h1">Use Jira at chat speed.</h1>
+        <p class="p">
+          Connect your Jira and run actions from WhatsApp, Microsoft Teams, or Slack.
+          Create issues, check status, comment, transition — all by messaging.
+        </p>
+
+        <div class="badges">
+          <div class="badge">No plugins</div>
+          <div class="badge">Your credentials</div>
+          <div class="badge">Autom Mate backend</div>
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="connect.html">Connect your tools</a>
+          <a class="btn" href="pricing.html">View pricing</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="kv">
+          <div class="item">
+            <div class="label">WhatsApp</div>
+            <div class="value">Fast mobile usage</div>
+          </div>
+          <div class="item">
+            <div class="label">Microsoft Teams</div>
+            <div class="value">Enterprise-friendly</div>
+          </div>
+          <div class="item">
+            <div class="label">Slack</div>
+            <div class="value">Engineering teams</div>
+          </div>
+          <div class="item">
+            <div class="label">Jira</div>
+            <div class="value">Create / update / search</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="badge">Example messages</div>
+        <div class="section">
+          <div class="small">Try messages like:</div>
+          <div class="toast" style="display:block;margin-top:10px">
+            “Create a bug: Login fails on Safari”
+          </div>
+          <div class="toast" style="display:block">
+            “What’s the status of PROJ-241?”
+          </div>
+          <div class="toast" style="display:block">
+            “Move PROJ-241 to In Progress and assign to Erdem”
+          </div>
+          <div class="toast" style="display:block">
+            “Comment on PROJ-241: reproduced on v1.3.2”
+          </div>
+        </div>
+
+        <div class="hr"></div>
+        <div class="small">
+          Note: This site is the UI only. All execution and integrations are handled by Autom Mate.
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> <span id="brandName2">Jira Chatbot</span></div>
+      <div class="footerlinks">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="connect.html">Connect</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    const cfg = getConfig();
+    qs("#brandName").textContent = cfg.BRAND.name;
+    qs("#brandName2").textContent = cfg.BRAND.name;
+    qs("#year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
