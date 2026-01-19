@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { MessageCircle, Zap, Shield, ArrowRight, Check, Sparkles, Bot, Clock, Loader2, X } from 'lucide-react';
+import { MessageCircle, Zap, Shield, ArrowRight, Check, Sparkles, Bot, Clock, Loader2, X, Play } from 'lucide-react';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [activeGif, setActiveGif] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -67,25 +68,46 @@ export default function Home() {
   const features = [
     {
       icon: MessageCircle,
-      title: 'Natural Language',
-      description: 'Chat naturally with AI that understands your intent and executes the right Jira actions.',
+      title: 'Talk, Don\'t Click',
+      description: 'Just type what you need. "Create a bug for login page" - done. No more navigating through menus.',
     },
     {
       icon: Zap,
-      title: 'Real-time Sync',
-      description: 'Create issues, update statuses, and get instant notifications on WhatsApp.',
+      title: 'Instant Updates',
+      description: 'Get notified the moment something changes. Comments, status updates, assignments - all in WhatsApp.',
     },
     {
       icon: Shield,
-      title: 'Enterprise Security',
-      description: 'OAuth 2.0 authentication ensures your credentials are never stored.',
+      title: 'Your Data, Your Control',
+      description: 'OAuth 2.0 means we never see your password. Revoke access anytime with one click.',
     },
   ];
 
   const steps = [
-    { number: '01', title: 'Register', desc: 'Sign up with your email', icon: Sparkles },
-    { number: '02', title: 'Connect to Jira', desc: 'Authorize your workspace', icon: Bot },
-    { number: '03', title: 'Start Chatting', desc: 'Manage Jira instantly', icon: Clock },
+    {
+      number: '01',
+      title: 'Sign Up',
+      desc: '30 seconds, no credit card',
+      icon: Sparkles,
+      gif: '/gifs/register.gif',
+      placeholder: 'Registration flow preview'
+    },
+    {
+      number: '02',
+      title: 'Connect Jira',
+      desc: 'One OAuth click',
+      icon: Bot,
+      gif: '/gifs/jira.gif',
+      placeholder: 'Jira connection preview'
+    },
+    {
+      number: '03',
+      title: 'Start Shipping',
+      desc: 'Message your Jira',
+      icon: Clock,
+      gif: '/gifs/whatsapp.gif',
+      placeholder: 'WhatsApp chat preview'
+    },
   ];
 
   return (
@@ -104,7 +126,7 @@ export default function Home() {
                 onClick={openModal}
                 className="btn btn-primary btn-sm"
               >
-                Request Early Access
+                Get Early Access
                 <ArrowRight size={16} />
               </button>
             </nav>
@@ -113,177 +135,170 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="hero">
+      <section className="hero-compact">
         <div className="container">
           <div className="hero-badge">
             <span className="badge">
-              <MessageCircle size={14} />
-              WhatsApp + Jira Integration
+              <Zap size={14} />
+              Your Jira, now on WhatsApp
             </span>
           </div>
 
-          <h1 className="hero-title">
-            Manage Jira from <span className="text-brand">WhatsApp</span>
+          <h1 className="hero-title-compact">
+            Stop context switching.<br />
+            <span className="text-brand">Ship faster.</span>
           </h1>
 
-          <p className="hero-subtitle">
-            Create issues, update statuses, and track projects directly from WhatsApp.
-            No more switching between apps.
+          <p className="hero-subtitle-compact">
+            Create tickets, update status, check sprint progress - all from WhatsApp.<br />
+            Because alt-tabbing to Jira 50 times a day is not a workflow.
           </p>
 
-          <div className="hero-buttons">
+          <div className="hero-buttons-compact">
             <button
               onClick={openModal}
               className="btn btn-primary btn-lg"
             >
-              Request Early Access
+              Get Early Access
               <ArrowRight size={18} />
             </button>
           </div>
 
-          <div className="hero-features">
+          <div className="hero-features-compact">
             <span className="hero-feature">
-              <Check size={18} />
-              No credit card required
+              <Check size={16} />
+              Free tier forever
             </span>
             <span className="hero-feature">
-              <Check size={18} />
-              10 free messages/day
+              <Check size={16} />
+              Setup in 2 min
             </span>
             <span className="hero-feature">
-              <Check size={18} />
-              2 minute setup
+              <Check size={16} />
+              No Jira admin needed
             </span>
-          </div>
-
-          <div className="hero-image">
-            <img src="/logo.png" alt="JiraChatbot" className="hero-logo" />
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <div className="section-badge">
-              <span className="badge badge-warm">Features</span>
-            </div>
-            <h2 className="section-title">Why teams choose JiraChatbot</h2>
-            <p className="section-subtitle">
-              The fastest way to manage Jira without leaving your favorite messaging app
-            </p>
-          </div>
-
-          <div className="feature-grid">
-            {features.map((feature) => (
-              <div key={feature.title} className="card">
-                <div className="icon-box mb-4">
-                  <feature.icon />
-                </div>
-                <h3 className="mb-2">{feature.title}</h3>
-                <p>{feature.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
       {/* How it Works Section */}
-      <section className="section" style={{ background: 'var(--color-white)' }}>
+      <section className="section-compact" style={{ background: 'var(--color-white)' }}>
         <div className="container">
-          <div className="section-header">
-            <div className="section-badge">
-              <span className="badge">How it Works</span>
-            </div>
-            <h2 className="section-title">Get started in 3 simple steps</h2>
-            <p className="section-subtitle">
-              Connect your Jira workspace to WhatsApp in minutes
+          <div className="section-header-compact">
+            <h2 className="section-title-compact">Three steps. That's it.</h2>
+            <p className="section-subtitle-compact">
+              We made it stupid simple because you have actual work to do.
             </p>
           </div>
 
-          <div className="feature-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+          <div className="steps-grid">
             {steps.map((item) => (
-              <div key={item.number} className="text-center">
-                <div className="icon-box mb-4" style={{ margin: '0 auto' }}>
-                  <item.icon />
+              <div key={item.number} className="step-card" onClick={() => setActiveGif(item)}>
+                <div className="step-gif-container">
+                  <div className="step-gif-placeholder">
+                    <Play size={32} />
+                    <span>{item.placeholder}</span>
+                  </div>
                 </div>
-                <span className="badge mb-3" style={{ fontSize: '0.75rem' }}>{item.number}</span>
-                <h3 className="mb-1" style={{ fontSize: '1.25rem' }}>{item.title}</h3>
-                <p style={{ fontSize: '0.9375rem' }}>{item.desc}</p>
+                <div className="step-content">
+                  <span className="step-number-badge">{item.number}</span>
+                  <h3 className="step-title">{item.title}</h3>
+                  <p className="step-desc">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-6">
+      {/* Features Section */}
+      <section className="section-compact">
+        <div className="container">
+          <div className="section-header-compact">
+            <h2 className="section-title-compact">Why devs love it</h2>
+          </div>
+
+          <div className="features-row">
+            {features.map((feature) => (
+              <div key={feature.title} className="feature-card">
+                <div className="feature-icon">
+                  <feature.icon size={20} />
+                </div>
+                <div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-desc">{feature.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section-compact">
+        <div className="container">
+          <div className="cta-compact">
+            <h2 className="cta-title-compact">Ready to ditch the Jira tab?</h2>
+            <p className="cta-subtitle-compact">
+              Join the waitlist. We're onboarding teams weekly.
+            </p>
             <button
               onClick={openModal}
               className="btn btn-primary btn-lg"
             >
-              Request Early Access
+              Get Early Access
               <ArrowRight size={18} />
             </button>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section">
-        <div className="container">
-          <div className="cta-section">
-            <h2 className="cta-title">Ready to take your jira to next level?</h2>
-            <p className="cta-subtitle">
-              Join JiraChatbot to manage projects faster.
-            </p>
-            <div className="cta-buttons">
-              <button
-                onClick={openModal}
-                className="btn btn-primary btn-lg"
-              >
-                Start Now
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="footer">
+      <footer className="footer-compact">
         <div className="container">
-          <div className="footer-inner" style={{ flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', textAlign: 'center' }}>
-              <Link to="/" className="logo">
-                <img src="/logo.png" alt="JiraChatbot" style={{ width: '36px', height: '36px' }} />
-                <span className="logo-text">JiraChatbot</span>
-              </Link>
-              <p className="footer-text" style={{ maxWidth: '300px' }}>
-                The easiest way to manage Jira through WhatsApp.
-              </p>
-            </div>
+          <div className="footer-inner-compact">
+            <Link to="/" className="logo">
+              <img src="/logo.png" alt="JiraChatbot" style={{ width: '28px', height: '28px' }} />
+              <span className="logo-text" style={{ fontSize: '1rem' }}>JiraChatbot</span>
+            </Link>
 
-            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div className="footer-links-compact">
               <Link to="/pricing" className="footer-link">Pricing</Link>
-              <button onClick={openModal} className="footer-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>Request Access</button>
               <Link to="/privacy" className="footer-link">Privacy</Link>
               <Link to="/terms" className="footer-link">Terms</Link>
             </div>
 
-            <div style={{ borderTop: '1px solid rgba(45, 48, 71, 0.08)', paddingTop: '1.5rem', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-              <p className="footer-text">
-                &copy; {new Date().getFullYear()} JiraChatbot. All rights reserved.
-              </p>
-              <a
-                href="https://autommate.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                Powered by Autom Mate
-              </a>
-            </div>
+            <a
+              href="https://autommate.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+              style={{ fontSize: '0.8125rem' }}
+            >
+              Powered by Autom Mate
+            </a>
           </div>
         </div>
       </footer>
+
+      {/* GIF Modal */}
+      {activeGif && (
+        <div className="modal-overlay" onClick={() => setActiveGif(null)}>
+          <div className="gif-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setActiveGif(null)}>
+              <X size={24} />
+            </button>
+            <div className="gif-modal-content">
+              <div className="gif-placeholder-large">
+                <Play size={48} />
+                <h3>{activeGif.title}</h3>
+                <p>GIF preview coming soon</p>
+                <p className="gif-path">Place your GIF at: <code>{activeGif.gif}</code></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Early Access Modal */}
       {isModalOpen && (
@@ -298,31 +313,31 @@ export default function Home() {
                 <div className="icon-box mb-4" style={{ margin: '0 auto', background: 'var(--color-success)', color: 'white' }}>
                   <Check size={24} />
                 </div>
-                <h2 style={{ marginBottom: '0.5rem' }}>You're on the list!</h2>
+                <h2 style={{ marginBottom: '0.5rem' }}>You're in!</h2>
                 <p style={{ color: 'var(--color-text-secondary)', marginBottom: '1.5rem' }}>
-                  We'll reach out soon with early access details.
+                  We'll hit you up when it's your turn.
                 </p>
                 <button onClick={closeModal} className="btn btn-primary">
-                  Got it
+                  Nice
                 </button>
               </div>
             ) : (
               <>
                 <div className="modal-header">
-                  <h2>Request Early Access</h2>
-                  <p>Be among the first to experience JiraChatbot</p>
+                  <h2>Get Early Access</h2>
+                  <p>Be first in line when we launch</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="modal-form">
                   <div className="form-group">
-                    <label htmlFor="name">Full Name</label>
+                    <label htmlFor="name">Name</label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="John Doe"
+                      placeholder="Jane Doe"
                       required
                     />
                   </div>
@@ -335,20 +350,20 @@ export default function Home() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="john@company.com"
+                      placeholder="jane@company.com"
                       required
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="occupation">Occupation</label>
+                    <label htmlFor="occupation">Role</label>
                     <input
                       type="text"
                       id="occupation"
                       name="occupation"
                       value={formData.occupation}
                       onChange={handleInputChange}
-                      placeholder="Product Manager"
+                      placeholder="Senior Dev, PM, etc."
                       required
                     />
                   </div>
@@ -368,7 +383,7 @@ export default function Home() {
 
                   {submitStatus === 'error' && (
                     <div className="form-error">
-                      Something went wrong. Please try again.
+                      Something went wrong. Try again?
                     </div>
                   )}
 
@@ -384,7 +399,7 @@ export default function Home() {
                         Submitting...
                       </>
                     ) : (
-                      'Request Access'
+                      'Join Waitlist'
                     )}
                   </button>
                 </form>
