@@ -169,10 +169,7 @@ export default function Home() {
               <div key={item.number} className="step-card-fun" onClick={() => setActiveGif(item)}>
                 <div className="step-emoji">{item.emoji}</div>
                 <div className="step-gif-area">
-                  <div className="step-gif-placeholder-fun">
-                    <Play size={24} />
-                    <span>{item.placeholder}</span>
-                  </div>
+                  <img src={item.gif} alt={item.title} className="step-gif-image" />
                 </div>
                 <div className="step-info">
                   <span className="step-num">{item.number}</span>
@@ -264,12 +261,8 @@ export default function Home() {
               <X size={24} />
             </button>
             <div className="gif-modal-content">
-              <div className="gif-placeholder-large">
-                <span style={{ fontSize: '3rem' }}>{activeGif.emoji}</span>
-                <h3>{activeGif.title}</h3>
-                <p>GIF coming soon</p>
-                <p className="gif-path">Place your GIF at: <code>{activeGif.gif}</code></p>
-              </div>
+              <img src={activeGif.gif} alt={activeGif.title} className="gif-modal-image" />
+              <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>{activeGif.title}</h3>
             </div>
           </div>
         </div>

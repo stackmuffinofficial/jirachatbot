@@ -1559,6 +1559,19 @@ p {
   background: rgba(13, 148, 136, 0.08);
 }
 
+.step-gif-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(45, 48, 71, 0.08);
+}
+
+.gif-modal-image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
 .step-info {
   display: flex;
   align-items: center;
