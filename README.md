@@ -2,6 +2,14 @@
 
 Static landing page for JiraChatbot - deployable to GitHub Pages.
 
+## Deployment Info
+
+| Setting | Value |
+|---------|-------|
+| **Repository** | https://github.com/stackmuffinofficial/jirachatbot.git |
+| **Branch** | `gh-pages` |
+| **GitHub Pages** | Settings → Pages → Source: `gh-pages` branch, `/ (root)` |
+
 ## Features
 
 - Home page with early access form
