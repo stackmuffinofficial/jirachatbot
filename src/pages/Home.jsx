@@ -8,10 +8,7 @@ export default function Home() {
   const [submitStatus, setSubmitStatus] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    occupation: '',
-    company: '',
   });
 
   const handleInputChange = (e) => {
@@ -33,17 +30,14 @@ export default function Home() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name: formData.name,
             email: formData.email,
-            occupation: formData.occupation,
-            company: formData.company,
           }),
         }
       );
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', occupation: '', company: '' });
+        setFormData({ email: '' });
       } else {
         setSubmitStatus('error');
       }
@@ -95,7 +89,9 @@ export default function Home() {
       <header className="header-minimal">
         <div className="container">
           <div className="header-inner">
-            <div></div>
+            <Link to="/" className="logo">
+              <img src="/logo.png" alt="JiraChatbot" />
+            </Link>
             <nav className="nav">
               <Link to="/pricing" className="nav-link">Pricing</Link>
               <button onClick={openModal} className="btn btn-primary btn-sm">
@@ -259,8 +255,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trusted By - Logo Carousel */}
+      <section className="section-fun logo-section">
+        <div className="container">
+          <div className="section-header-fun" style={{ marginBottom: '2rem' }}>
+            <span className="section-eyebrow">Trusted by teams at</span>
+          </div>
+        </div>
+        <div className="logo-carousel">
+          <div className="logo-track">
+            {/* First set of logos */}
+            <div className="logo-slide"><img src="/logos/logo1.png" alt="Company 1" /></div>
+            <div className="logo-slide"><img src="/logos/logo2.png" alt="Company 2" /></div>
+            <div className="logo-slide"><img src="/logos/logo3.png" alt="Company 3" /></div>
+            <div className="logo-slide"><img src="/logos/logo4.png" alt="Company 4" /></div>
+            <div className="logo-slide"><img src="/logos/logo5.png" alt="Company 5" /></div>
+            <div className="logo-slide"><img src="/logos/logo6.png" alt="Company 6" /></div>
+            <div className="logo-slide"><img src="/logos/logo7.png" alt="Company 7" /></div>
+            <div className="logo-slide"><img src="/logos/logo8.png" alt="Company 8" /></div>
+            <div className="logo-slide"><img src="/logos/logo9.png" alt="Company 9" /></div>
+            <div className="logo-slide"><img src="/logos/logo10.png" alt="Company 10" /></div>
+            <div className="logo-slide"><img src="/logos/logo11.png" alt="Company 11" /></div>
+            <div className="logo-slide"><img src="/logos/logo12.png" alt="Company 12" /></div>
+            {/* Duplicate for seamless loop */}
+            <div className="logo-slide"><img src="/logos/logo1.png" alt="Company 1" /></div>
+            <div className="logo-slide"><img src="/logos/logo2.png" alt="Company 2" /></div>
+            <div className="logo-slide"><img src="/logos/logo3.png" alt="Company 3" /></div>
+            <div className="logo-slide"><img src="/logos/logo4.png" alt="Company 4" /></div>
+            <div className="logo-slide"><img src="/logos/logo5.png" alt="Company 5" /></div>
+            <div className="logo-slide"><img src="/logos/logo6.png" alt="Company 6" /></div>
+            <div className="logo-slide"><img src="/logos/logo7.png" alt="Company 7" /></div>
+            <div className="logo-slide"><img src="/logos/logo8.png" alt="Company 8" /></div>
+            <div className="logo-slide"><img src="/logos/logo9.png" alt="Company 9" /></div>
+            <div className="logo-slide"><img src="/logos/logo10.png" alt="Company 10" /></div>
+            <div className="logo-slide"><img src="/logos/logo11.png" alt="Company 11" /></div>
+            <div className="logo-slide"><img src="/logos/logo12.png" alt="Company 12" /></div>
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof Teaser */}
-      <section className="section-fun" style={{ background: 'var(--color-white)' }}>
+      <section className="section-fun">
         <div className="container">
           <div className="testimonial-teaser">
             <p className="quote">"I updated 3 tickets while waiting for my coffee. My standup took 30 seconds. My manager thinks I'm a productivity god."</p>
@@ -269,13 +304,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section - Urgent */}
+      {/* CTA Section */}
       <section className="section-fun">
         <div className="container">
           <div className="cta-fun">
             <div className="cta-emoji">🚀</div>
             <h2>Stop torturing yourself.</h2>
-            <p>Life's too short for Jira tabs. Join the waitlist.</p>
+            <p>Life's too short for Jira tabs.</p>
             <button onClick={openModal} className="btn btn-cta btn-lg">
               <Rocket size={20} />
               I Need This Now
@@ -295,14 +330,6 @@ export default function Home() {
               <Link to="/privacy">Privacy</Link>
               <Link to="/terms">Terms</Link>
             </div>
-            <a
-              href="https://autommate.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-powered"
-            >
-              Powered by Autom Mate
-            </a>
           </div>
         </div>
       </footer>
@@ -317,37 +344,24 @@ export default function Home() {
 
             {submitStatus === 'success' ? (
               <div className="modal-success-fun">
-                <div className="success-emoji">🎉</div>
-                <h2>You're in!</h2>
-                <p>We'll hit you up soon. Get ready to never open Jira again.</p>
+                <div className="success-emoji">🚀</div>
+                <h2>You're all set!</h2>
+                <p>Check your inbox — your Jira-free journey starts now. No more tabs, just WhatsApp.</p>
                 <button onClick={closeModal} className="btn btn-primary">
-                  Nice!
+                  Let's Go!
                 </button>
               </div>
             ) : (
               <>
                 <div className="modal-header-fun">
-                  <span className="modal-emoji">✨</span>
-                  <h2>Join the Cool Kids</h2>
-                  <p>Early access = bragging rights + first dibs</p>
+                  <span className="modal-emoji">💬</span>
+                  <h2>Say Goodbye to Jira Tabs</h2>
+                  <p>Drop your email and we'll get you set up with WhatsApp + Jira magic</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="modal-form">
                   <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="What should we call you?"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="email">Work Email</label>
+                    <label htmlFor="email">Your Email</label>
                     <input
                       type="email"
                       id="email"
@@ -355,32 +369,6 @@ export default function Home() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="you@company.com"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="occupation">What do you do?</label>
-                    <input
-                      type="text"
-                      id="occupation"
-                      name="occupation"
-                      value={formData.occupation}
-                      onChange={handleInputChange}
-                      placeholder="Developer, PM, Professional Tab Closer..."
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="company">Company</label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      placeholder="Where the magic happens"
                       required
                     />
                   </div>
@@ -400,12 +388,13 @@ export default function Home() {
                     {isSubmitting ? (
                       <>
                         <Loader2 size={18} className="spinning" />
-                        Hold tight...
+                        Setting things up...
                       </>
                     ) : (
                       <>
-                        <Zap size={18} />
-                        Count Me In
+                        <Rocket size={20} />
+                        Start My Jira-Free Life
+                        <ArrowRight size={18} />
                       </>
                     )}
                   </button>
