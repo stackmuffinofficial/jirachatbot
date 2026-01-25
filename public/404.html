@@ -9,7 +9,8 @@
       const path = window.location.pathname;
       const search = window.location.search;
       const hash = window.location.hash;
-      window.location.replace('/' + '?p=' + encodeURIComponent(path) + search + hash);
+      const basePath = '/jirachatbot/';
+      window.location.replace(basePath + '?p=' + encodeURIComponent(path.replace(basePath, '/')) + search + hash);
     </script>
   </head>
   <body>

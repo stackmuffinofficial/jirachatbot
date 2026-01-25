@@ -4,9 +4,8 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  // For custom domain, use '/'
-  // Only use '/repo-name/' if deploying to username.github.io/repo-name/
-  base: '/',
+  // For GitHub Pages deployment to username.github.io/repo-name/
+  base: '/jirachatbot/',
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
