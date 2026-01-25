@@ -1,12 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Zap, ArrowRight, Check, Loader2, X, Sparkles, Coffee, Rocket, Heart, MessageSquare, Timer, Smartphone } from 'lucide-react';
 
 export default function Home() {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [activePainTab, setActivePainTab] = useState(0);
   const [formData, setFormData] = useState({
     email: '',
   });
@@ -36,8 +38,9 @@ export default function Home() {
       );
 
       if (response.ok) {
-        setSubmitStatus('success');
         setFormData({ email: '' });
+        setIsModalOpen(false);
+        navigate('/thank-you');
       } else {
         setSubmitStatus('error');
       }
@@ -58,6 +61,37 @@ export default function Home() {
     setIsModalOpen(false);
     setSubmitStatus(null);
   };
+
+  const painPoints = [
+    {
+      number: '01',
+      title: 'Slow & Laggy',
+      problem: 'Jira Cloud is painfully slow. Page loads take forever, the UI freezes, and larger projects feel like wading through molasses.',
+      solution: 'JiraChatbot runs on WhatsApp — instant responses, zero loading screens. Create tickets, check status, update issues in seconds. No more watching that blue spinner.',
+      emoji: '🐌'
+    },
+    {
+      number: '02',
+      title: 'Too Complicated',
+      problem: 'Too many menus. Too many options. Finding a simple issue means clicking through boards, backlogs, filters, and sprints. New team members are lost for weeks.',
+      solution: 'Just text what you need. "Show my open tickets" or "Create a bug for login page". Natural language, zero learning curve. Your intern can use it on day one.',
+      emoji: '🤯'
+    },
+    {
+      number: '03',
+      title: 'Workflow Chaos',
+      problem: 'Custom fields everywhere. 47 status options. Workflows that look like spaghetti. Nobody knows what "In Review (Legacy)" means anymore.',
+      solution: 'JiraChatbot cuts through the chaos. It shows you what matters — your tasks, your sprint, your deadlines. Clean and simple, no matter how messy your Jira setup is.',
+      emoji: '🍝'
+    },
+    {
+      number: '04',
+      title: 'Always Out of Reach',
+      problem: 'Need to update a ticket but you\'re on mobile? Good luck with that tiny UI. On a call? Can\'t open Jira. Away from your desk? Forget about it. Jira demands your full attention and a proper screen.',
+      solution: 'WhatsApp is already on your phone, always open, always accessible. Update tickets while commuting, check sprint status during lunch, create bugs the moment you spot them. Jira finally goes where you go.',
+      emoji: '📱'
+    },
+  ];
 
   const steps = [
     {
@@ -149,34 +183,85 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What is JiraChatbot Section */}
+      {/* Trusted By - Logo Carousel */}
+      <section className="section-fun logo-section logo-section-top">
+        <div className="container">
+          <div className="section-header-fun" style={{ marginBottom: '1.5rem' }}>
+            <span className="section-eyebrow">Trusted by teams at</span>
+          </div>
+        </div>
+        <div className="logo-carousel">
+          <div className="logo-track">
+            {/* First set of logos */}
+            <div className="logo-slide"><img src="/logos/logo1.png" alt="Company 1" /></div>
+            <div className="logo-slide"><img src="/logos/logo2.png" alt="Company 2" /></div>
+            <div className="logo-slide"><img src="/logos/logo3.png" alt="Company 3" /></div>
+            <div className="logo-slide"><img src="/logos/logo4.png" alt="Company 4" /></div>
+            <div className="logo-slide"><img src="/logos/logo5.png" alt="Company 5" /></div>
+            <div className="logo-slide"><img src="/logos/logo6.png" alt="Company 6" /></div>
+            <div className="logo-slide"><img src="/logos/logo7.png" alt="Company 7" /></div>
+            <div className="logo-slide"><img src="/logos/logo8.png" alt="Company 8" /></div>
+            <div className="logo-slide"><img src="/logos/logo9.png" alt="Company 9" /></div>
+            <div className="logo-slide"><img src="/logos/logo10.png" alt="Company 10" /></div>
+            <div className="logo-slide"><img src="/logos/logo11.png" alt="Company 11" /></div>
+            <div className="logo-slide"><img src="/logos/logo12.png" alt="Company 12" /></div>
+            {/* Duplicate for seamless loop */}
+            <div className="logo-slide"><img src="/logos/logo1.png" alt="Company 1" /></div>
+            <div className="logo-slide"><img src="/logos/logo2.png" alt="Company 2" /></div>
+            <div className="logo-slide"><img src="/logos/logo3.png" alt="Company 3" /></div>
+            <div className="logo-slide"><img src="/logos/logo4.png" alt="Company 4" /></div>
+            <div className="logo-slide"><img src="/logos/logo5.png" alt="Company 5" /></div>
+            <div className="logo-slide"><img src="/logos/logo6.png" alt="Company 6" /></div>
+            <div className="logo-slide"><img src="/logos/logo7.png" alt="Company 7" /></div>
+            <div className="logo-slide"><img src="/logos/logo8.png" alt="Company 8" /></div>
+            <div className="logo-slide"><img src="/logos/logo9.png" alt="Company 9" /></div>
+            <div className="logo-slide"><img src="/logos/logo10.png" alt="Company 10" /></div>
+            <div className="logo-slide"><img src="/logos/logo11.png" alt="Company 11" /></div>
+            <div className="logo-slide"><img src="/logos/logo12.png" alt="Company 12" /></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pain Points Section - Tabbed */}
       <section className="section-fun" style={{ background: 'var(--color-white)' }}>
         <div className="container">
-          <div className="what-is-section">
-            <div className="what-is-content">
-              <span className="section-eyebrow">The missing piece</span>
-              <h2 className="what-is-title">Jira is powerful. Using it shouldn't feel like work.</h2>
-              <p className="what-is-text">
-                Every developer knows the drill: you're in the zone, code flowing, then you need to update a ticket.
-                Tab switch. Load Jira. Find the project. Find the issue. Update the status. Lose your flow. Repeat 20 times a day.
-              </p>
-              <p className="what-is-text">
-                <strong>JiraChatbot bridges that gap.</strong> It brings Jira to where you already are - WhatsApp.
-                Create tickets with a text. Update statuses with a message. Check sprint progress while waiting for your build.
-                No more context switching. No more Jira tabs.
-              </p>
-              <div className="what-is-features">
-                <div className="what-is-feature">
-                  <MessageSquare size={20} />
-                  <span>Natural language commands</span>
-                </div>
-                <div className="what-is-feature">
-                  <Timer size={20} />
-                  <span>Saves 30+ minutes daily</span>
-                </div>
-                <div className="what-is-feature">
-                  <Smartphone size={20} />
-                  <span>Works on any device</span>
+          <div className="section-header-fun">
+            <span className="section-eyebrow">Sound familiar?</span>
+            <h2 className="section-title-fun">Jira's biggest headaches. We fix all of them.</h2>
+          </div>
+
+          <div className="steps-tabbed">
+            {/* Tab Buttons */}
+            <div className="steps-tabs">
+              {painPoints.map((item, index) => (
+                <button
+                  key={item.number}
+                  className={`step-tab ${activePainTab === index ? 'active' : ''}`}
+                  onClick={() => setActivePainTab(index)}
+                >
+                  <span className="step-tab-emoji">{item.emoji}</span>
+                  <span className="step-tab-number">{item.number}</span>
+                  <span className="step-tab-title">{item.title}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Tab Content */}
+            <div className="steps-content">
+              <div className="steps-content-inner pain-content">
+                <div className="pain-point-content">
+                  <div className="steps-text-header">
+                    <span className="steps-text-emoji">{painPoints[activePainTab].emoji}</span>
+                    <h3 className="steps-text-title">{painPoints[activePainTab].title}</h3>
+                  </div>
+                  <div className="pain-problem">
+                    <span className="pain-label">😤 The Problem</span>
+                    <p>{painPoints[activePainTab].problem}</p>
+                  </div>
+                  <div className="pain-solution">
+                    <span className="pain-label">✨ How We Fix It</span>
+                    <p>{painPoints[activePainTab].solution}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -255,45 +340,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trusted By - Logo Carousel */}
-      <section className="section-fun logo-section">
-        <div className="container">
-          <div className="section-header-fun" style={{ marginBottom: '2rem' }}>
-            <span className="section-eyebrow">Trusted by teams at</span>
-          </div>
-        </div>
-        <div className="logo-carousel">
-          <div className="logo-track">
-            {/* First set of logos */}
-            <div className="logo-slide"><img src="/logos/logo1.png" alt="Company 1" /></div>
-            <div className="logo-slide"><img src="/logos/logo2.png" alt="Company 2" /></div>
-            <div className="logo-slide"><img src="/logos/logo3.png" alt="Company 3" /></div>
-            <div className="logo-slide"><img src="/logos/logo4.png" alt="Company 4" /></div>
-            <div className="logo-slide"><img src="/logos/logo5.png" alt="Company 5" /></div>
-            <div className="logo-slide"><img src="/logos/logo6.png" alt="Company 6" /></div>
-            <div className="logo-slide"><img src="/logos/logo7.png" alt="Company 7" /></div>
-            <div className="logo-slide"><img src="/logos/logo8.png" alt="Company 8" /></div>
-            <div className="logo-slide"><img src="/logos/logo9.png" alt="Company 9" /></div>
-            <div className="logo-slide"><img src="/logos/logo10.png" alt="Company 10" /></div>
-            <div className="logo-slide"><img src="/logos/logo11.png" alt="Company 11" /></div>
-            <div className="logo-slide"><img src="/logos/logo12.png" alt="Company 12" /></div>
-            {/* Duplicate for seamless loop */}
-            <div className="logo-slide"><img src="/logos/logo1.png" alt="Company 1" /></div>
-            <div className="logo-slide"><img src="/logos/logo2.png" alt="Company 2" /></div>
-            <div className="logo-slide"><img src="/logos/logo3.png" alt="Company 3" /></div>
-            <div className="logo-slide"><img src="/logos/logo4.png" alt="Company 4" /></div>
-            <div className="logo-slide"><img src="/logos/logo5.png" alt="Company 5" /></div>
-            <div className="logo-slide"><img src="/logos/logo6.png" alt="Company 6" /></div>
-            <div className="logo-slide"><img src="/logos/logo7.png" alt="Company 7" /></div>
-            <div className="logo-slide"><img src="/logos/logo8.png" alt="Company 8" /></div>
-            <div className="logo-slide"><img src="/logos/logo9.png" alt="Company 9" /></div>
-            <div className="logo-slide"><img src="/logos/logo10.png" alt="Company 10" /></div>
-            <div className="logo-slide"><img src="/logos/logo11.png" alt="Company 11" /></div>
-            <div className="logo-slide"><img src="/logos/logo12.png" alt="Company 12" /></div>
-          </div>
-        </div>
-      </section>
-
       {/* Social Proof Teaser */}
       <section className="section-fun">
         <div className="container">
@@ -342,65 +388,52 @@ export default function Home() {
               <X size={24} />
             </button>
 
-            {submitStatus === 'success' ? (
-              <div className="modal-success-fun">
-                <div className="success-emoji">🚀</div>
-                <h2>You're all set!</h2>
-                <p>Check your inbox — your Jira-free journey starts now. No more tabs, just WhatsApp.</p>
-                <button onClick={closeModal} className="btn btn-primary">
-                  Let's Go!
-                </button>
+            <div className="modal-header-fun">
+              <span className="modal-emoji">💬</span>
+              <h2>Say Goodbye to Jira Tabs</h2>
+              <p>Drop your email and we'll get you set up with WhatsApp + Jira magic</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="modal-form">
+              <div className="form-group">
+                <label htmlFor="email">Your Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="you@company.com"
+                  required
+                />
               </div>
-            ) : (
-              <>
-                <div className="modal-header-fun">
-                  <span className="modal-emoji">💬</span>
-                  <h2>Say Goodbye to Jira Tabs</h2>
-                  <p>Drop your email and we'll get you set up with WhatsApp + Jira magic</p>
+
+              {submitStatus === 'error' && (
+                <div className="form-error">
+                  Oops, something broke. Try again?
                 </div>
+              )}
 
-                <form onSubmit={handleSubmit} className="modal-form">
-                  <div className="form-group">
-                    <label htmlFor="email">Your Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="you@company.com"
-                      required
-                    />
-                  </div>
-
-                  {submitStatus === 'error' && (
-                    <div className="form-error">
-                      Oops, something broke. Try again?
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn btn-cta btn-lg"
-                    style={{ width: '100%' }}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 size={18} className="spinning" />
-                        Setting things up...
-                      </>
-                    ) : (
-                      <>
-                        <Rocket size={20} />
-                        Start My Jira-Free Life
-                        <ArrowRight size={18} />
-                      </>
-                    )}
-                  </button>
-                </form>
-              </>
-            )}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn btn-cta btn-lg"
+                style={{ width: '100%' }}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={18} className="spinning" />
+                    Setting things up...
+                  </>
+                ) : (
+                  <>
+                    <Rocket size={20} />
+                    Start My Jira-Free Life
+                    <ArrowRight size={18} />
+                  </>
+                )}
+              </button>
+            </form>
           </div>
         </div>
       )}

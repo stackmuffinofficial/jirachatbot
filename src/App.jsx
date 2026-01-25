@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import ThankYou from './pages/ThankYou';
 import NotFound from './pages/NotFound';
 
 // Handle GitHub Pages SPA redirect
@@ -31,6 +32,7 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/thank-you" element={<ThankYou />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

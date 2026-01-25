@@ -7,11 +7,11 @@ export default function NotFound() {
       {/* Header */}
       <header className="header">
         <div className="container">
-          <div className="header-inner" style={{ justifyContent: 'center' }}>
+          <div className="header-inner">
             <Link to="/" className="logo">
               <img src="/logo.png" alt="JiraChatbot" />
-              <span className="logo-text">JiraChatbot</span>
             </Link>
+            <div />
           </div>
         </div>
       </header>
@@ -60,18 +60,11 @@ export default function NotFound() {
       <footer className="footer">
         <div className="container">
           <div className="footer-inner">
-            <Link to="/" className="logo" style={{ gap: '0.5rem' }}>
-              <img src="/logo.png" alt="JiraChatbot" style={{ width: '24px', height: '24px' }} />
-              <span className="footer-text">JiraChatbot</span>
-            </Link>
-            <a
-              href="https://autommate.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-link"
-            >
-              Powered by Autom Mate
-            </a>
+            <span className="footer-brand">JiraChatbot</span>
+            <div className="footer-links-minimal">
+              <Link to="/privacy">Privacy</Link>
+              <Link to="/terms">Terms</Link>
+            </div>
           </div>
         </div>
       </footer>

@@ -1,18 +1,16 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Check, ArrowLeft, Zap, Star, Crown, Loader2, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Check, ArrowLeft, Zap, Star, Crown, Loader2, X, Rocket, ArrowRight } from 'lucide-react';
 
 export default function Pricing() {
+  const navigate = useNavigate();
   const [isYearly, setIsYearly] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    occupation: '',
-    company: '',
   });
 
   const handleInputChange = (e) => {
@@ -34,20 +32,17 @@ export default function Pricing() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name: formData.name,
             email: formData.email,
-            occupation: formData.occupation,
-            company: formData.company,
             selectedPlan: selectedPlan?.name || '',
             billingPeriod: isYearly ? 'yearly' : 'monthly',
-            price: selectedPlan ? (isYearly ? selectedPlan.price.yearly : selectedPlan.price.monthly) : 0,
           }),
         }
       );
 
       if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', occupation: '', company: '' });
+        setFormData({ email: '' });
+        setIsModalOpen(false);
+        navigate('/thank-you');
       } else {
         setSubmitStatus('error');
       }
@@ -118,15 +113,13 @@ export default function Pricing() {
       <header className="header">
         <div className="container">
           <div className="header-inner">
+            <Link to="/" className="logo">
+              <img src="/logo.png" alt="JiraChatbot" />
+            </Link>
             <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <ArrowLeft size={18} />
               Back
             </Link>
-            <Link to="/" className="logo">
-              <img src="/logo.png" alt="JiraChatbot" />
-              <span className="logo-text">JiraChatbot</span>
-            </Link>
-            <div style={{ width: '80px' }} />
           </div>
         </div>
       </header>
@@ -216,18 +209,11 @@ export default function Pricing() {
       <footer className="footer">
         <div className="container">
           <div className="footer-inner">
-            <Link to="/" className="logo" style={{ gap: '0.5rem' }}>
-              <img src="/logo.png" alt="JiraChatbot" style={{ width: '28px', height: '28px' }} />
-              <span className="footer-text">JiraChatbot</span>
-            </Link>
-            <a
-              href="https://autommate.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-link"
-            >
-              Powered by Autom Mate
-            </a>
+            <span className="footer-brand">JiraChatbot</span>
+            <div className="footer-links-minimal">
+              <Link to="/privacy">Privacy</Link>
+              <Link to="/terms">Terms</Link>
+            </div>
           </div>
         </div>
       </footer>
@@ -235,108 +221,57 @@ export default function Pricing() {
       {/* Early Access Modal */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content modal-fun" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>
               <X size={24} />
             </button>
 
-            {submitStatus === 'success' ? (
-              <div className="modal-success">
-                <div className="icon-box mb-4" style={{ margin: '0 auto', background: 'var(--color-success)', color: 'white' }}>
-                  <Check size={24} />
-                </div>
-                <h2 style={{ marginBottom: '0.5rem' }}>You're on the list!</h2>
-                <p style={{ color: 'var(--color-text-secondary)', marginBottom: '1.5rem' }}>
-                  We'll reach out soon with early access details for {selectedPlan?.name}.
-                </p>
-                <button onClick={closeModal} className="btn btn-primary">
-                  Got it
-                </button>
+            <div className="modal-header-fun">
+              <span className="modal-emoji">💬</span>
+              <h2>Get {selectedPlan?.name}</h2>
+              <p>Drop your email and we'll get you set up with WhatsApp + Jira magic</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="modal-form">
+              <div className="form-group">
+                <label htmlFor="email">Your Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="you@company.com"
+                  required
+                />
               </div>
-            ) : (
-              <>
-                <div className="modal-header">
-                  <h2>Request Early Access</h2>
-                  <p>Get early access to <strong>{selectedPlan?.name}</strong></p>
+
+              {submitStatus === 'error' && (
+                <div className="form-error">
+                  Oops, something broke. Try again?
                 </div>
+              )}
 
-                <form onSubmit={handleSubmit} className="modal-form">
-                  <div className="form-group">
-                    <label htmlFor="name">Full Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="John Doe"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="email">Work Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="john@company.com"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="occupation">Occupation</label>
-                    <input
-                      type="text"
-                      id="occupation"
-                      name="occupation"
-                      value={formData.occupation}
-                      onChange={handleInputChange}
-                      placeholder="Product Manager"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="company">Company</label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      placeholder="Acme Inc."
-                      required
-                    />
-                  </div>
-
-                  {submitStatus === 'error' && (
-                    <div className="form-error">
-                      Something went wrong. Please try again.
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn btn-primary btn-lg"
-                    style={{ width: '100%' }}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 size={18} className="spinning" />
-                        Submitting...
-                      </>
-                    ) : (
-                      'Request Access'
-                    )}
-                  </button>
-                </form>
-              </>
-            )}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn btn-cta btn-lg"
+                style={{ width: '100%' }}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={18} className="spinning" />
+                    Setting things up...
+                  </>
+                ) : (
+                  <>
+                    <Rocket size={20} />
+                    Start My Jira-Free Life
+                    <ArrowRight size={18} />
+                  </>
+                )}
+              </button>
+            </form>
           </div>
         </div>
       )}
